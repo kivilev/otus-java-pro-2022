@@ -1,3 +1,6 @@
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 public class MainApp {
 
     private static final int MIN_RANGE = 1;
@@ -6,8 +9,10 @@ public class MainApp {
     private static final Object WORK_MONITOR = new Object();
 
     private static int currentPosition = 0;
-    private static WorkMode workMode = WorkMode.MAKE_OPERATION;
+    private static WorkMode workMode = WorkMode.GET_NEXT_COUNTER_VALUE;
     private static CountDirection countDirection = CountDirection.INCREMENT;
+
+    public static final Logger logger = LoggerFactory.getLogger(MainApp.class);
 
     public static void main(String[] args) {
         Thread masterThread = new Thread(() -> {
@@ -24,13 +29,13 @@ public class MainApp {
                         if (currentPosition == MIN_RANGE) countDirection = CountDirection.INCREMENT;
                     }
 
-                    System.out.printf("%s: %s\r\n", currentThread.getName(), currentPosition);
+                    logger.info("{}", currentPosition);
 
-                    workMode = WorkMode.LOG;
+                    workMode = WorkMode.SHOW_CURRENT_COUNTER_VALUE;
                     WORK_MONITOR.notify();
 
                     try {
-                        while (workMode != WorkMode.MAKE_OPERATION) {
+                        while (workMode != WorkMode.GET_NEXT_COUNTER_VALUE) {
                             WORK_MONITOR.wait();
                         }
                     } catch (InterruptedException e) {
@@ -46,7 +51,7 @@ public class MainApp {
 
             while (!currentThread.isInterrupted()) {
                 synchronized (WORK_MONITOR) {
-                    while (workMode != WorkMode.LOG) {
+                    while (workMode != WorkMode.SHOW_CURRENT_COUNTER_VALUE) {
                         try {
                             WORK_MONITOR.wait();
                         } catch (InterruptedException e) {
@@ -54,7 +59,7 @@ public class MainApp {
                         }
                     }
 
-                    System.out.printf("%s: %s\r\n", currentThread.getName(), currentPosition);
+                    logger.info("{}", currentPosition);
 
                     try {
                         Thread.sleep(1000);// чтоб успевали прочесть сообщения
@@ -62,7 +67,7 @@ public class MainApp {
                         e.printStackTrace();
                     }
 
-                    workMode = WorkMode.MAKE_OPERATION;
+                    workMode = WorkMode.GET_NEXT_COUNTER_VALUE;
                     WORK_MONITOR.notify();
                 }
             }
@@ -74,7 +79,7 @@ public class MainApp {
 }
 
 enum WorkMode {
-    MAKE_OPERATION, LOG
+    GET_NEXT_COUNTER_VALUE, SHOW_CURRENT_COUNTER_VALUE
 }
 
 enum CountDirection {
