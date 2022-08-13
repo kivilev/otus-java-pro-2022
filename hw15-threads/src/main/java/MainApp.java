@@ -64,7 +64,7 @@ public class MainApp {
                     try {
                         Thread.sleep(1000);// чтоб успевали прочесть сообщения
                     } catch (InterruptedException e) {
-                        e.printStackTrace();
+                        return;
                     }
 
                     workMode = WorkMode.GET_NEXT_COUNTER_VALUE;
