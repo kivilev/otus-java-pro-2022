@@ -100,8 +100,7 @@ class SensorDataProcessorBufferedTest {
         assertThat(flushedData).hasSize(BUFFER_SIZE / 2);
     }
 
-    //@RepeatedTest(100)
-    @Test
+    @RepeatedTest(100)
     void shouldCorrectFlushDataFromManyThreads() {
         List<SensorData> sensorDataList = getSensorDataForTest(BUFFER_SIZE - 1);
         sensorDataList.forEach(sensorData -> processor.process(sensorData));
