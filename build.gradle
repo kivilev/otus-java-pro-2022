@@ -29,12 +29,18 @@ allprojects {
     dependencyManagement {
         dependencies {
             imports {
-                mavenBom "org.springframework.boot:spring-boot-dependencies:2.7.0"
+                mavenBom "org.springframework.boot:spring-boot-dependencies:2.7.1"
                 mavenBom "org.testcontainers:testcontainers-bom:1.17.1"
-                mavenBom "com.google.protobuf:protobuf-bom:3.21.1"
+                mavenBom "com.google.protobuf:protobuf-bom:3.21.1"                
             }
             dependency "com.google.guava:guava:${Versions.guava}"
             dependency "org.ow2.asm:asm-commons:${Versions.asm}"
+            dependency("org.glassfish:jakarta.json:${Versions.glassfishJson}")
+            dependency("org.webjars:sockjs-client:${Versions.sockjs}")
+            dependency("org.webjars:stomp-websocket:${Versions.stomp}")
+            dependency("org.webjars:bootstrap:${Versions.bootstrap}")
+            dependency("org.springdoc:springdoc-openapi-ui:${Versions.springDocOpenapiUi}")
+            dependency("com.google.code.findbugs:jsr305:${Versions.jsr305}")            
         }
     }
 }
