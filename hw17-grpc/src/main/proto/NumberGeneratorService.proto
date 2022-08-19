@@ -5,14 +5,14 @@ package ru.kivilev.protobuf.generated;
 option java_multiple_files = true;
 
 message NumberRequest {
-  int64 firstValue = 1;
-  int64 lastValue = 2;
+  int32 firstValue = 1;
+  int32 lastValue = 2;
 }
 
 message NumberResponse {
-  int64 numberValue = 1;
+  int32 numberValue = 1;
 }
 
-service RemoteDBService {
+service RemoteNumberGeneratorService {
     rpc getNumbers(NumberRequest) returns (stream NumberResponse);
 }

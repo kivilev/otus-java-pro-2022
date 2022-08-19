@@ -26,6 +26,5 @@ public interface Versions {
     String grpc = "1.44.1";
     String errorProneAnnotations = "2.11.0";
     String tomcatAnnotationsApi = "6.0.53";
-
-    String kafkaClients = "3.0.0";
+    String logBackClassic = "1.2.11";
 }

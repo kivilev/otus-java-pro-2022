@@ -31,7 +31,7 @@ allprojects {
             imports {
                 mavenBom "org.springframework.boot:spring-boot-dependencies:2.7.1"
                 mavenBom "org.testcontainers:testcontainers-bom:1.17.1"
-                mavenBom "com.google.protobuf:protobuf-bom:3.21.1"                
+                mavenBom "com.google.protobuf:protobuf-bom:3.21.1"
             }
             dependency "com.google.guava:guava:${Versions.guava}"
             dependency "org.ow2.asm:asm-commons:${Versions.asm}"
@@ -40,7 +40,12 @@ allprojects {
             dependency("org.webjars:stomp-websocket:${Versions.stomp}")
             dependency("org.webjars:bootstrap:${Versions.bootstrap}")
             dependency("org.springdoc:springdoc-openapi-ui:${Versions.springDocOpenapiUi}")
-            dependency("com.google.code.findbugs:jsr305:${Versions.jsr305}")            
+            dependency("com.google.code.findbugs:jsr305:${Versions.jsr305}")
+
+            dependency("io.grpc:grpc-netty:${Versions.grpc}")
+            dependency("io.grpc:grpc-protobuf:${Versions.grpc}")
+            dependency("io.grpc:grpc-stub:${Versions.grpc}")
+            dependency("ch.qos.logback:logback-classic:${Versions.logBackClassic}")
         }
     }
 }
