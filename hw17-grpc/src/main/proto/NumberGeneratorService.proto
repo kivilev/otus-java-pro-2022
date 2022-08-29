@@ -1,0 +1,18 @@
+syntax = "proto3";
+
+package ru.kivilev.protobuf.generated;
+
+option java_multiple_files = true;
+
+message NumberRequest {
+  int32 firstValue = 1;
+  int32 lastValue = 2;
+}
+
+message NumberResponse {
+  int32 numberValue = 1;
+}
+
+service RemoteNumberGeneratorService {
+    rpc getNumbers(NumberRequest) returns (stream NumberResponse);
+}
