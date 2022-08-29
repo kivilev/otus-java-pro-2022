@@ -1,9 +1,7 @@
 package ru.kivilev.protobuf.client;
 
-import io.grpc.stub.StreamObserver;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import ru.kivilev.protobuf.generated.NumberResponse;
 
 import java.util.concurrent.Executors;
 import java.util.concurrent.ScheduledExecutorService;
@@ -17,17 +15,17 @@ public class CountService {
     private int currentLoopCount = FROM_LOOP;
 
     private final ScheduledExecutorService scheduledExecutorService = Executors.newScheduledThreadPool(1);
-    private final StreamObserver<NumberResponse> observer;
+    private final NumberResponseStreamObserver observer;
     private static final Logger logger = LoggerFactory.getLogger(CountService.class);
 
 
-    public CountService(StreamObserver<NumberResponse> observer) {
+    public CountService(NumberResponseStreamObserver observer) {
         this.observer = observer;
     }
 
     public void runCycle() {
         Runnable scheduledTask = () -> {
-            currentValue += 1 + ((NumberResponseStreamObserver) observer).getAndSetNumberValueFromServer(0);
+            currentValue += 1 + observer.getAndSetNumberValueFromServer(0);
             logger.info("Current value: {}", currentValue);
             currentLoopCount++;
             if (currentLoopCount >= TO_LOOP) {
