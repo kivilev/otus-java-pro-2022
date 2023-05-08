@@ -5,8 +5,7 @@ Education group: 2022-03
   
 ### Author
 I'm Kivilev Denis.  
-I've been working as Oracle Database Developer since 2005.
-Last 2 years I work as a Backend Developer.
+I'm a Java/Oracle developer with over 17+ years of experience working in the fintech, retail, banking, and education sectors.
 
 You can contact me by:
 - email: kivilev.d@gmail.com  
